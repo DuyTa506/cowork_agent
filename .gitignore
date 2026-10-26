@@ -1,0 +1,10 @@
+.env
+.cache/
+logs/
+*.log
+__pycache__/
+# model weights and OCR checkpoints stay local: never commit or push them
+models/
+*.safetensors
+*.pt
+*.bin
