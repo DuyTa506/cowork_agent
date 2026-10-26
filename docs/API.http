@@ -1,0 +1,145 @@
+@baseUrl = http://localhost:8000
+@token = {{login.response.body.access_token}}
+
+### Health
+GET {{baseUrl}}/api/health
+
+### Login - replace with the credentials in your local environment
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "ChangeMe123!"
+}
+
+### Current user
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer {{token}}
+
+### Organisation chart (flat, in order)
+GET {{baseUrl}}/api/units
+Authorization: Bearer {{token}}
+
+### List documents the user may read (filters: q, state, document_type, unit_id, date_from, date_to, sort, desc, limit, offset)
+GET {{baseUrl}}/api/documents?q=quyet%20dinh&limit=20
+Authorization: Bearer {{token}}
+
+### Upload one or more files (each succeeds or fails on its own)
+POST {{baseUrl}}/api/documents
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=----qk3
+
+------qk3
+Content-Disposition: form-data; name="declared_secret"
+
+false
+------qk3
+Content-Disposition: form-data; name="files"; filename="van-ban.docx"
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+
+< ./van-ban.docx
+------qk3--
+
+### One document with its processing steps
+GET {{baseUrl}}/api/documents/1
+Authorization: Bearer {{token}}
+
+### Document text, paragraph by paragraph
+GET {{baseUrl}}/api/documents/1/content
+Authorization: Bearer {{token}}
+
+### Correct extracted metadata by hand (uploader or admin)
+PATCH {{baseUrl}}/api/documents/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "title": "V/v ...", "issued_date": "2026-05-04" }
+
+### Process again
+POST {{baseUrl}}/api/documents/1/reprocess
+Authorization: Bearer {{token}}
+
+### Delete (file, index entries and record)
+DELETE {{baseUrl}}/api/documents/1
+Authorization: Bearer {{token}}
+
+### ---- Admin ----
+
+### Accounts
+GET {{baseUrl}}/api/admin/users
+Authorization: Bearer {{token}}
+
+### Create account
+POST {{baseUrl}}/api/admin/users
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "username": "congbinh01", "password": "Matkhau-thu-nghiem-1", "full_name": "Cán bộ Công binh", "unit_id": "btm.cong_binh", "role": "staff" }
+
+### All settings sections (secrets appear only as {"set": true/false})
+GET {{baseUrl}}/api/admin/settings
+Authorization: Bearer {{token}}
+
+### Try a connection without saving (omitted secrets use the saved ones)
+POST {{baseUrl}}/api/admin/settings/embedding/test
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "values": { "provider": "openai", "base_url": "http://10.0.0.5:8000/v1", "model": "my-embedder", "dim": 1024 } }
+
+### Save a section (an endpoint outside the private network needs confirm_hosts)
+PUT {{baseUrl}}/api/admin/settings/embedding
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "values": { "provider": "openai", "base_url": "http://10.0.0.5:8000/v1", "model": "my-embedder", "dim": 1024 }, "confirm_hosts": [] }
+
+### Index every document again (after changing the embedding model)
+POST {{baseUrl}}/api/admin/reindex
+Authorization: Bearer {{token}}
+
+### Audit trail
+GET {{baseUrl}}/api/admin/audit-logs?limit=50&action=settings
+Authorization: Bearer {{token}}
+
+### ---- Assistant (see CHAT_API.md for the event shapes) ----
+
+### Start a conversation
+POST {{baseUrl}}/api/chat/sessions
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{}
+
+### Ask (server-sent events: session, step, canvas, answer, error, done). Put the id returned above in the path.
+POST {{baseUrl}}/api/chat/sessions/{{sessionId}}/messages
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "text": "Kế hoạch tập huấn Công binh năm 2026 tổ chức khi nào?", "canvas": false, "attachment_ids": [] }
+
+### Stop the answer in progress
+POST {{baseUrl}}/api/chat/sessions/{{sessionId}}/stop
+Authorization: Bearer {{token}}
+
+### Attach a file to the conversation
+POST {{baseUrl}}/api/chat/sessions/{{sessionId}}/attachments
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=x
+
+--x
+Content-Disposition: form-data; name="file"; filename="ke-hoach.docx"
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+
+< ./ke-hoach.docx
+--x--
+
+### The draft (canvas) of the conversation
+GET {{baseUrl}}/api/chat/sessions/{{sessionId}}/draft
+Authorization: Bearer {{token}}
+
+### Check the draft against Thông tư 68
+POST {{baseUrl}}/api/chat/sessions/{{sessionId}}/draft/check
+Authorization: Bearer {{token}}

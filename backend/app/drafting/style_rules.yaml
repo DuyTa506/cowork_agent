@@ -1,0 +1,101 @@
+# Quy tắc văn phong chung cho trợ lý soạn thảo (công cụ canvas_style), áp dụng cho mọi đơn vị.
+#
+# Tệp này do cán bộ văn thư / nghiệp vụ duyệt và sửa: thêm, bớt hay sửa một dòng rồi khởi động lại dịch vụ là trợ lý dùng ngay.
+# - "general": quy định của Thông tư 68/2023/TT-BQP (Quy chế công tác văn thư trong Bộ Quốc phòng, Phụ lục I, mục 6 "Nội dung
+#   văn bản"), giữ nguyên ý của văn bản gốc.
+# - "words": cách dùng từ mà kho văn bản của Quân khu thống nhất dùng; con số là số văn bản trong kho có cách viết đó (khảo sát
+#   10/2026 trên 3.552 văn bản), để người duyệt cân nhắc.
+# - "kinds": quy ước theo loại văn bản (khóa là ký hiệu loại: CV, KH, BC, ...), rút từ kho văn bản và các mẫu của Thông tư 68.
+# Văn phong riêng của từng đơn vị (bố cục, câu mở đầu, câu kết, thuật ngữ) không ở đây mà được học từ kho văn bản
+# (backend/tools/build_style_profiles.py).
+source: "Thông tư 68/2023/TT-BQP, Quy chế công tác văn thư trong Bộ Quốc phòng, Phụ lục I mục 6"
+
+general:
+  - "Nội dung phù hợp với tên loại văn bản, với chủ trương, đường lối của Đảng, pháp luật của Nhà nước; không trái với văn bản của cấp trên; trình bày ngắn gọn, rõ ràng, chính xác."
+  - "Dùng từ ngữ tiếng Việt phổ thông, ngôn ngữ viết đơn nghĩa, cách diễn đạt đơn giản, dễ hiểu; thuật ngữ chuyên môn thì giải thích rõ trong văn bản."
+  - "Chỉ viết tắt những từ, cụm từ thông dụng. Từ, cụm từ dùng nhiều lần thì viết tắt; lần đầu viết đầy đủ, chữ viết tắt đặt trong ngoặc đơn ngay sau, ví dụ: Bộ Chỉ huy quân sự (BCHQS)."
+  - "Viện dẫn văn bản lần đầu ghi đầy đủ: tên loại, số, ký hiệu, ngày tháng năm ban hành, cơ quan ban hành và trích yếu (luật, pháp lệnh chỉ ghi tên); các lần sau chỉ ghi tên loại và số, ký hiệu. Ví dụ: lần đầu 'Nghị định số 30/2020/NĐ-CP ngày 05 tháng 3 năm 2020 của Chính phủ về công tác văn thư', lần sau 'Nghị định số 30/2020/NĐ-CP'."
+  - "Văn bản bố cục theo phần, mục từ lớn đến nhỏ: mục lớn đánh số La Mã (I, II...) và viết in hoa; mục nhỏ đánh số Ả Rập (1, 2...), rồi chữ cái (a, b...), rồi gạch đầu dòng."
+  - "Kết thúc nội dung văn bản bằng dấu chấm hết (./.)."
+  - "Không tự đặt số liệu, tên người, số hiệu văn bản hay mốc thời gian chưa có căn cứ; chỗ chưa biết để dấu '…' cho người soạn điền."
+
+words:
+  - use: "bảo đảm"
+    avoid: "đảm bảo"
+    docs: [2396, 978]
+  - use: "cơ quan, đơn vị"
+    note: "cách gọi chung các nơi nhận, thực hiện (2003 văn bản)"
+  - use: "Thủ trưởng Bộ Tư lệnh Quân khu / Thủ trưởng Bộ Tham mưu"
+    note: "gọi người chỉ huy theo cấp, không gọi tên riêng (1831 văn bản có 'thủ trưởng')"
+  - use: "chấp hành nghiêm / thực hiện nghiêm túc"
+    note: "cách yêu cầu thực hiện (742 / 972 văn bản)"
+  - use: "hiệp đồng"
+    note: "phối hợp giữa các cơ quan, đơn vị trong nhiệm vụ quân sự (736 văn bản)"
+  - use: "đồng chí"
+    note: "gọi cán bộ, chiến sĩ trong văn bản: 'đồng chí Trưởng phòng ...', không dùng 'ông', 'anh'"
+
+kinds:
+  CV:
+    - "Trích yếu sau 'V/v', một cụm từ ngắn nêu việc."
+    - "Có dòng 'Kính gửi:' ghi cơ quan, đơn vị nhận; mở đầu nêu căn cứ hoặc lý do ('Thực hiện ...', 'Căn cứ ...'), rồi nội dung đề nghị, hướng dẫn."
+    - "Kết bằng câu đề nghị, yêu cầu ('Đề nghị các cơ quan, đơn vị ... thực hiện./.')."
+  KH:
+    - "Mở đầu nêu căn cứ ('Thực hiện ...', 'Căn cứ ...') rồi câu '<Cơ quan> xây dựng kế hoạch ... như sau:'."
+    - "Bố cục thường gặp: I. MỤC ĐÍCH, YÊU CẦU; II. NỘI DUNG (hoặc NHIỆM VỤ); III. THỜI GIAN, ĐỊA ĐIỂM, THÀNH PHẦN; IV. CÔNG TÁC BẢO ĐẢM; V. TỔ CHỨC THỰC HIỆN."
+    - "Phần tổ chức thực hiện giao việc cho từng cơ quan, đơn vị, có thời hạn; kết bằng câu yêu cầu thực hiện ('Nhận được kế hoạch, các cơ quan, đơn vị ... triển khai thực hiện nghiêm túc./.')."
+  BC:
+    - "Mở đầu nêu căn cứ hoặc yêu cầu báo cáo ('Thực hiện ...'), rồi '<Cơ quan> báo cáo ... như sau:'."
+    - "Bố cục thường gặp: đặc điểm tình hình (thuận lợi, khó khăn); kết quả thực hiện; hạn chế, nguyên nhân; phương hướng, nhiệm vụ thời gian tới; đề xuất, kiến nghị."
+    - "Nêu số liệu cụ thể có nguồn; kết bằng 'Trên đây là báo cáo ...' hoặc câu đề nghị./."
+  TB:
+    - "Nêu ngắn gọn sự việc, quyết định hoặc ý kiến cần thông báo và đối tượng phải thực hiện."
+  TTr:
+    - "Nêu lý do, căn cứ, nội dung đề nghị và kiến nghị cụ thể để cấp trên xem xét, quyết định; kết bằng câu 'Kính đề nghị Thủ trưởng ... xem xét, phê duyệt./.'."
+  HD:
+    - "Nêu mục đích, phạm vi, rồi hướng dẫn từng nội dung theo trình tự thực hiện; cuối cùng là tổ chức thực hiện."
+  QĐ:
+    - "Sau căn cứ là dòng 'Theo đề nghị của ...'; nội dung chia điều: Điều 1 nội dung quyết định, các điều sau quy định hiệu lực và trách nhiệm thi hành."
+    - "Điều cuối: '... chịu trách nhiệm thi hành Quyết định này./.'; điều hiệu lực: 'Quyết định này có hiệu lực kể từ ngày ký.'"
+  CT:
+    - "Nêu tình hình, yêu cầu rồi các nhiệm vụ, biện pháp cụ thể giao cho từng cơ quan, đơn vị; giọng văn mệnh lệnh, dứt khoát."
+
+# Phong cách người dùng chọn trên Canvas. "don_vi" chỉ theo hồ sơ đơn vị ở trên; hai phong cách kia thêm quy tắc diễn đạt.
+# Mức chi tiết "vua" là mặc định. Phong cách không được bỏ thành phần bắt buộc của loại văn bản hay quy tắc Thông tư 68.
+presets:
+  don_vi:
+    name: "Chuẩn đơn vị"
+    rules: []
+  lanh_dao:
+    name: "Báo cáo lãnh đạo"
+    rules:
+      - "Nêu kết quả và số liệu trước, rồi mới trình bày bối cảnh."
+      - "Mỗi đoạn tập trung vào một nhận định."
+      - "Khi nêu hạn chế phải gắn với nguyên nhân."
+      - "Kiến nghị nêu rõ chủ thể thực hiện và thời hạn."
+  chi_dao:
+    name: "Chỉ đạo cấp dưới"
+    rules:
+      - "Giao việc rõ ai làm, làm việc gì, thời hạn nào."
+      - "Câu ngắn, dứt khoát; không diễn giải."
+
+detail:
+  ngan:
+    name: "Ngắn"
+    rules:
+      - "Viết ngắn: mỗi ý một câu, bỏ diễn giải và cụm từ không thêm thông tin."
+      - "Giữ đủ số liệu, căn cứ và việc được giao."
+  vua:
+    name: "Vừa"
+    rules:
+      - "Mức chi tiết vừa phải: đủ ý chính và căn cứ, không lan man."
+  day_du:
+    name: "Đầy đủ"
+    rules:
+      - "Trình bày đầy đủ: nêu căn cứ, nội dung, cách thực hiện và trách nhiệm của từng bên."
+      - "Không vì viết đủ mà lặp lại một ý ở nhiều đoạn."
+
+# Cụm từ sáo rỗng: bộ kiểm tra văn phong nhắc khi gặp, để người soạn viết cụ thể hơn.
+avoid_phrases:
+  - "đạt được nhiều kết quả tích cực"
+  - "góp phần quan trọng"
+  - "trong thời gian vừa qua"

@@ -1,0 +1,70 @@
+# Từ điển kiểm duyệt đầu vào. Mỗi mục: t = cụm từ, c = nhóm, s = mức (nhe | nang), f = true nếu so khớp được khi người dùng gõ không dấu.
+# f: false bắt buộc có dấu đúng, để không nhầm với từ bình thường ("các" ≠ "cặc", "lon bia" ≠ "lồn", "đít" ≠ "địt").
+# Nhóm: tuc (chửi thề, thô tục) | xuc_pham (xúc phạm cá nhân) | ky_thi (kỳ thị vùng miền, dân tộc, giới, xu hướng) | de_doa (đe dọa cá nhân).
+# Cố ý KHÔNG đưa từ ngữ quân sự thông thường (tiêu diệt, tấn công, bắn, giết giặc...) hay từ nhiều nghĩa (mọi, chó, cc).
+- {t: địt mẹ, c: tuc, s: nang, f: true}
+- {t: địt con mẹ, c: tuc, s: nang, f: true}
+- {t: địt cụ, c: tuc, s: nang, f: true}
+- {t: địt bố, c: tuc, s: nang, f: true}
+- {t: đjt mẹ, c: tuc, s: nang, f: true}
+- {t: đjt, c: tuc, s: nang, f: true}
+- {t: djt, c: tuc, s: nang, f: true}
+- {t: địt, c: tuc, s: nang, f: false}
+- {t: đụ má, c: tuc, s: nang, f: false}
+- {t: đụ mẹ, c: tuc, s: nang, f: false}
+- {t: đù má, c: tuc, s: nhe, f: false}
+- {t: đm, c: tuc, s: nang, f: false}
+- {t: đmm, c: tuc, s: nang, f: true}
+- {t: dmm, c: tuc, s: nang, f: true}
+- {t: dkm, c: tuc, s: nang, f: true}
+- {t: đkm, c: tuc, s: nang, f: true}
+- {t: đcm, c: tuc, s: nang, f: true}
+- {t: dcm, c: tuc, s: nang, f: true}
+- {t: cmm, c: tuc, s: nang, f: true}
+- {t: clm, c: tuc, s: nang, f: true}
+- {t: cặc, c: tuc, s: nang, f: false}
+- {t: lồn, c: tuc, s: nang, f: false}
+- {t: buồi, c: tuc, s: nang, f: false}
+- {t: vãi lồn, c: tuc, s: nang, f: false}
+- {t: vcl, c: tuc, s: nhe, f: true}
+- {t: vkl, c: tuc, s: nhe, f: true}
+- {t: vl, c: tuc, s: nhe, f: true}
+- {t: clgt, c: tuc, s: nhe, f: true}
+- {t: đéo, c: tuc, s: nhe, f: false}
+- {t: mẹ kiếp, c: tuc, s: nhe, f: false}
+- {t: mẹ mày, c: xuc_pham, s: nang, f: true}
+- {t: con mẹ mày, c: xuc_pham, s: nang, f: true}
+- {t: cút mẹ, c: xuc_pham, s: nang, f: true}
+- {t: thằng chó, c: xuc_pham, s: nang, f: false}
+- {t: đồ chó, c: xuc_pham, s: nang, f: false}
+- {t: con chó mày, c: xuc_pham, s: nang, f: false}
+- {t: óc chó, c: xuc_pham, s: nhe, f: false}
+- {t: thằng ngu, c: xuc_pham, s: nhe, f: false}
+- {t: con ngu, c: xuc_pham, s: nhe, f: false}
+- {t: đồ ngu, c: xuc_pham, s: nhe, f: false}
+- {t: ngu như chó, c: xuc_pham, s: nhe, f: false}
+- {t: ngu như bò, c: xuc_pham, s: nhe, f: false}
+- {t: đồ khốn, c: xuc_pham, s: nhe, f: false}
+- {t: khốn nạn, c: xuc_pham, s: nhe, f: false}
+- {t: đồ súc vật, c: xuc_pham, s: nang, f: false}
+- {t: súc sinh, c: xuc_pham, s: nang, f: false}
+- {t: mất dạy, c: xuc_pham, s: nhe, f: false}
+- {t: đồ điên, c: xuc_pham, s: nhe, f: false}
+- {t: con đĩ, c: xuc_pham, s: nang, f: false}
+- {t: thằng đĩ, c: xuc_pham, s: nang, f: false}
+- {t: đồ đĩ, c: xuc_pham, s: nang, f: false}
+- {t: đồ mọi, c: ky_thi, s: nang, f: false}
+- {t: bọn mọi, c: ky_thi, s: nang, f: false}
+- {t: thằng mọi, c: ky_thi, s: nang, f: false}
+- {t: mọi đen, c: ky_thi, s: nang, f: false}
+- {t: khựa, c: ky_thi, s: nang, f: false}
+- {t: chệt, c: ky_thi, s: nang, f: false}
+- {t: pê đê, c: ky_thi, s: nang, f: false}
+- {t: bê đê, c: ky_thi, s: nang, f: false}
+- {t: đồ bóng, c: ky_thi, s: nang, f: false}
+- {t: đàn bà thì biết gì, c: ky_thi, s: nhe, f: false}
+- {t: giết mày, c: de_doa, s: nang, f: false}
+- {t: giết cả nhà mày, c: de_doa, s: nang, f: false}
+- {t: đập chết mày, c: de_doa, s: nang, f: false}
+- {t: chém chết mày, c: de_doa, s: nang, f: false}
+- {t: tao giết, c: de_doa, s: nang, f: false}

@@ -1,0 +1,261 @@
+/*
+ * Design tokens for QK3 Documents (see design-system/qk3-documents/MASTER.md and COMPONENTS.md).
+ * Components use these variables only; never write raw colours elsewhere.
+ * Light is the default; dark applies for [data-theme="dark"] (set on <html> by the inline script in index.html / lib/theme.ts).
+ */
+@import '@fontsource/be-vietnam-pro/latin-400.css';
+@import '@fontsource/be-vietnam-pro/latin-500.css';
+@import '@fontsource/be-vietnam-pro/latin-600.css';
+@import '@fontsource/be-vietnam-pro/latin-700.css';
+@import '@fontsource/be-vietnam-pro/latin-ext-400.css';
+@import '@fontsource/be-vietnam-pro/latin-ext-500.css';
+@import '@fontsource/be-vietnam-pro/latin-ext-600.css';
+@import '@fontsource/be-vietnam-pro/latin-ext-700.css';
+@import '@fontsource/be-vietnam-pro/vietnamese-400.css';
+@import '@fontsource/be-vietnam-pro/vietnamese-500.css';
+@import '@fontsource/be-vietnam-pro/vietnamese-600.css';
+@import '@fontsource/be-vietnam-pro/vietnamese-700.css';
+@import '@fontsource/tinos/latin-400.css';
+@import '@fontsource/tinos/latin-700.css';
+@import '@fontsource/tinos/latin-400-italic.css';
+@import '@fontsource/tinos/latin-ext-400.css';
+@import '@fontsource/tinos/latin-ext-700.css';
+@import '@fontsource/tinos/vietnamese-400.css';
+@import '@fontsource/tinos/vietnamese-700.css';
+@import '@fontsource/tinos/vietnamese-400-italic.css';
+
+:root {
+  color-scheme: light;
+
+  /* ---- surfaces and text ---- */
+  --bg: #f3f5f9;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --surface-hover: #eef2f8;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --control-border: #7d8da4;
+  --text: #0f172a;
+  --text-2: #475569;
+  --text-3: #5b6b82;
+  --placeholder: #64738a;
+  --scrim: rgb(7 22 50 / 0.5);
+
+  /* ---- brand ---- */
+  --brand-950: #071632;
+  --brand-900: #0a1f44;
+  --brand-700: #12397a;
+  --primary: #1d4ed8;
+  --primary-hover: #1e40af;
+  --primary-soft: #e8eefe;
+  --primary-ink: #1d4ed8;
+  --on-primary: #ffffff;
+  --on-solid: #ffffff;
+  --accent: #c9971c;
+  --accent-ink: #8a5a0b;
+  --accent-soft: #fbf2d9;
+
+  /* ---- status: solid (text/icon), soft (background), line (border) ---- */
+  --ok: #147a39;      --ok-soft: #e6f4ea;      --ok-line: #b9dfc4;
+  --warn: #a8480a;    --warn-soft: #fef3c7;    --warn-line: #f2d68a;
+  --danger: #b91c1c;  --danger-soft: #fde8e8;  --danger-line: #f4b8b8;
+  --info: #0369a1;    --info-soft: #e0f2fe;    --info-line: #a9d8f2;
+  --neutral: #475569; --neutral-soft: #eef1f6; --neutral-line: #d6dde8;
+
+  /* ---- document "paper" and file types ---- */
+  --desk: #e6e9ef;
+  --paper: #ffffff;
+  --paper-ink: #111111;
+  --highlight: rgb(201 151 28 / 0.3);
+  --ft-word: #1e5bb8;  --ft-word-bg: #e7effb;
+  --ft-pdf: #b3322a;   --ft-pdf-bg: #fbeae8;
+  --ft-doc: #54648a;   --ft-doc-bg: #eceff5;
+  --ft-other: #5b6b82; --ft-other-bg: #eef1f6;
+
+  /* ---- sidebar (navy in both themes) ---- */
+  --side-bg: linear-gradient(180deg, var(--brand-900) 0%, var(--brand-950) 100%);
+  --side-text: #c9d6ee;
+  --side-muted: #94a8cb;
+  --side-hover: rgb(255 255 255 / 0.07);
+  --side-active: rgb(255 255 255 / 0.11);
+  --side-line: rgb(255 255 255 / 0.09);
+
+  /* ---- typography ---- */
+  --font: 'Be Vietnam Pro', system-ui, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+  --font-doc: 'Times New Roman', Tinos, 'Liberation Serif', serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', 'JetBrains Mono', Consolas, monospace;
+
+  /* ---- space (4 px scale), shape, elevation ---- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 20px;
+  --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-14: 56px;
+  --r-xs: 4px;
+  --r-ctl: 8px;
+  --r-card: 12px;
+  --r-pill: 999px;
+  --r-paper: 2px;
+  --shadow-1: 0 1px 2px rgb(15 23 42 / 0.06), 0 1px 1px rgb(15 23 42 / 0.04);
+  --shadow-2: 0 8px 24px rgb(15 23 42 / 0.1);
+  --shadow-3: 0 20px 48px rgb(15 23 42 / 0.18);
+  --shadow-paper: 0 1px 3px rgb(15 23 42 / 0.12), 0 12px 32px rgb(15 23 42 / 0.1);
+
+  /* ---- controls ---- */
+  --ctl-h: 36px;
+  --ctl-h-sm: 28px;
+  --ctl-h-lg: 44px;
+  --select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  --check-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3.5 8.5 3 3 6-6.5'/%3E%3C/svg%3E");
+  --minus-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M4 8h8'/%3E%3C/svg%3E");
+
+  /* ---- motion ---- */
+  --dur-fast: 150ms;
+  --dur-menu: 200ms;
+  --dur-panel: 260ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* ---- layout ---- */
+  --sidebar-w: 248px;
+  --sidebar-w-rail: 72px;
+  --sidebar-width: var(--sidebar-w);
+  --topbar-h: 56px;
+  --topbar-height: var(--topbar-h);
+  --page-max: 1280px;
+  --z-sticky: 10;
+  --z-sidebar: 30;
+  --z-popover: 60;
+  --z-modal: 70;
+  --z-toast: 90;
+  --z-progress: 100;
+
+  /* =========================================================================
+   * ALIASES: names used by the pre-redesign stylesheets (documents, admin, check, assistant, canvas, viewer).
+   * They keep those pages rendering sensibly until phase 2 migrates them. Do not use in new code.
+   * ========================================================================= */
+  --line: var(--border);
+  --line-soft: var(--border);
+  --line-strong: var(--border-strong);
+  --line-hover: var(--border-strong);
+  --muted: var(--text-3);
+  --link: var(--primary);
+  --bg-soft: var(--surface-2);
+  --doc-bg: var(--desk);
+  --primary-tint: var(--primary-soft);
+  --primary-ring: color-mix(in srgb, var(--primary) 28%, transparent);
+  --primary-edge: var(--primary-hover);
+  --brass: var(--accent);
+  --brass-ink: var(--accent-ink);
+  --brass-tint: var(--accent-soft);
+  --teal-bar: var(--accent);
+  --success: var(--ok);   --success-bg: var(--ok-soft);   --success-line: var(--ok-line);
+  --warning: var(--warn); --warning-bg: var(--warn-soft); --warning-line: var(--warn-line);
+  --danger-bg: var(--danger-soft);
+  --danger-edge: var(--danger);
+  --info-bg: var(--info-soft);
+  --neutral-bg: var(--neutral-soft);
+  --green: var(--ok);
+  --blue: var(--info);
+  --amber: var(--warn);
+  --red: var(--danger);
+  --grey: var(--neutral);
+  --ink-900: var(--brand-900);
+  --ink-800: var(--brand-900);
+  --ink-700: var(--brand-700);
+  --ink-hover: var(--side-hover);
+  --ink-line: var(--side-line);
+  --ink-text: var(--side-text);
+  --ink-muted: var(--side-muted);
+  --navy: var(--brand-900);
+  --navy-active: var(--brand-700);
+  --navy-line: var(--side-line);
+  --navy-text: var(--side-text);
+  --navy-muted: var(--side-muted);
+  --navy-faint: var(--side-muted);
+  --net-on: var(--ok);
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 12px;
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-xl: var(--r-lg);
+  --sh-1: var(--shadow-1);
+  --sh-2: var(--shadow-2);
+  --sh-ctl: var(--shadow-1);
+  --sh-paper: var(--shadow-paper);
+  --shadow-pop: var(--shadow-2);
+  --shadow-sheet: var(--shadow-paper);
+  --font-display: var(--font);
+  --t-fast: var(--dur-fast);
+  --t-panel: var(--dur-panel);
+  --focus-ring: var(--primary);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0b1220;
+  --surface: #111a2c;
+  --surface-2: #16213a;
+  --surface-hover: #1b2845;
+  --border: #25324f;
+  --border-strong: #34446a;
+  --control-border: #5a6c96;
+  --text: #e6ecf8;
+  --text-2: #a9b6d0;
+  --text-3: #8d9cbb;
+  --placeholder: #7584a4;
+  --scrim: rgb(2 8 20 / 0.66);
+
+  --brand-700: #1b4b99;
+  --primary: #4f83f7;
+  --primary-hover: #6b96f8;
+  --primary-soft: #16275a;
+  --primary-ink: #7da3fa;
+  --on-primary: #06112b;
+  --on-solid: #0b1220;
+  --accent: #e0b13c;
+  --accent-ink: #e0b13c;
+  --accent-soft: #3a2f0e;
+
+  --ok: #4ade80;      --ok-soft: #12301f;      --ok-line: #1f5434;
+  --warn: #fbbf24;    --warn-soft: #3a2a08;    --warn-line: #66490f;
+  --danger: #f87171;  --danger-soft: #3a1414;  --danger-line: #6b2424;
+  --info: #38bdf8;    --info-soft: #0c2a3d;    --info-line: #17506f;
+  --neutral: #a9b6d0; --neutral-soft: #1b2640; --neutral-line: #2d3b5c;
+
+  /* old heading colours (navy in light) must stay readable on the dark desk */
+  --ink-900: var(--text);
+  --ink-800: var(--text);
+  --ink-700: var(--primary-ink);
+  --navy: var(--text);
+
+  --desk: #0e1626;
+  --highlight: rgb(224 177 60 / 0.3);
+  --ft-word: #7fb0f5;  --ft-word-bg: #14274a;
+  --ft-pdf: #f38c84;   --ft-pdf-bg: #3a1a1a;
+  --ft-doc: #a4b3d6;   --ft-doc-bg: #1c2845;
+  --ft-other: #9aa9c6; --ft-other-bg: #1b2640;
+
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 0 0 1px rgb(255 255 255 / 0.02);
+  --shadow-2: 0 8px 24px rgb(0 0 0 / 0.45);
+  --shadow-3: 0 20px 48px rgb(0 0 0 / 0.6);
+  --shadow-paper: 0 1px 3px rgb(0 0 0 / 0.5), 0 12px 32px rgb(0 0 0 / 0.4);
+
+  --select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238d9cbb' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  --check-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2306112b' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3.5 8.5 3 3 6-6.5'/%3E%3C/svg%3E");
+  --minus-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2306112b' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M4 8h8'/%3E%3C/svg%3E");
+}
+
+/* ---- tone helpers (legacy `Tone` names: green / blue / amber / red / grey) ---- */
+.tone-bg--green { background: var(--ok); }
+.tone-bg--blue { background: var(--info); }
+.tone-bg--amber { background: var(--warn); }
+.tone-bg--red { background: var(--danger); }
+.tone-bg--grey { background: var(--text-3); }
+
+.tone-text--green { color: var(--ok); }
+.tone-text--blue { color: var(--info); }
+.tone-text--amber { color: var(--warn); }
+.tone-text--red,
+.text-red { color: var(--danger); }
+.tone-text--grey { color: var(--text-3); }

@@ -1,0 +1,108 @@
+# Danh mục đơn vị Quân khu 3, lập từ "Sơ đồ tổ chức biên chế Quân khu 3" (training_space/Untitled.jpeg).
+# id ổn định, không đổi khi đổi tên; parent tạo thành cây quyền: người dùng xem được cây con của đơn vị mình.
+# type: bo_tu_lenh | co_quan | phong | ban | don_vi.   aliases: tên viết tắt / tên thư mục / cách viết khác (không phân biệt hoa thường, dấu).
+# provisional: true = có trong dữ liệu nhưng KHÔNG có trên sơ đồ, cần xác nhận vị trí trong cây.
+- {id: btl, name: Quân khu 3, type: bo_tu_lenh, aliases: [Bộ Tư lệnh Quân khu 3, Bộ Tư lệnh, QK3, BTL]}
+
+# ---- Bộ Tham mưu
+- {id: btm, parent: btl, name: Bộ Tham mưu, type: co_quan, aliases: [BTM, Bộ Tham mưu Quân khu 3]}
+- {id: btm.van_phong, parent: btm, name: Văn phòng, type: phong, aliases: [Văn phòng Quân khu]}
+- {id: btm.thanh_tra, parent: btm, name: Thanh tra Quốc phòng, type: phong, aliases: [Thanh tra QP, Thanh tra quốc phòng Quân khu]}
+- {id: btm.chinh_tri, parent: btm, name: Phòng Chính trị, type: phong}
+- {id: btm.cong_binh, parent: btm, name: Phòng Công binh, type: phong, aliases: [Công binh]}
+- {id: btm.co_yeu, parent: btm, name: Phòng Cơ yếu, type: phong, aliases: [Phòng CY, Cơ yếu]}
+- {id: btm.dqtv, parent: btm, name: Phòng Dân quân tự vệ, type: phong, aliases: [Phòng DQTV, DQTV]}
+- {id: btm.hoa_hoc, parent: btm, name: Phòng Hóa học, type: phong, aliases: [Hoá học]}
+- {id: btm.hau_can, parent: btm, name: Phòng Hậu cần, type: phong}
+- {id: btm.khqs, parent: btm, name: Phòng Khoa học quân sự, type: phong, aliases: [Phòng KHQS, KHQS]}
+- {id: btm.phao_binh, parent: btm, name: Phòng Pháo binh, type: phong}
+- {id: btm.phong_khong, parent: btm, name: Phòng Phòng không, type: phong}
+- {id: btm.quan_bao, parent: btm, name: Phòng Quân báo, type: phong}
+- {id: btm.qhnt, parent: btm, name: Phòng Quân huấn - Nhà trường, type: phong, aliases: [Phòng QHNT, QHNT, Quân huấn]}
+- {id: btm.quan_luc, parent: btm, name: Phòng Quân lực, type: phong}
+- {id: btm.thong_tin, parent: btm, name: Phòng Thông tin, type: phong, aliases: [Cơ quan Chủ nhiệm Thông tin]}
+- {id: btm.tac_chien, parent: btm, name: Phòng Tác chiến, type: phong}
+- {id: btm.tcdt, parent: btm, name: Phòng Tác chiến điện tử, type: phong}
+- {id: btm.tang_thiet_giap, parent: btm, name: Phòng Tăng thiết giáp, type: phong}
+- {id: btm.tai_chinh, parent: btm, name: Phòng Tài chính, type: phong}
+- {id: btm.dac_cong, parent: btm, name: Phòng Đặc công, type: phong}
+- {id: btm.ban_cntt, parent: btm, name: Ban Công nghệ thông tin, type: ban, aliases: [Ban CNTT]}
+- {id: btm.ban_hanh_chinh, parent: btm, name: Ban Hành chính, type: ban}
+- {id: btm.ban_tai_chinh, parent: btm, name: Ban Tài chính (Bộ Tham mưu), type: ban}
+- {id: btm.thi_hanh_an, parent: btm, name: Phòng Thi hành án, type: phong, provisional: true}
+- {id: btm.dieu_tra_hinh_su, parent: btm, name: Phòng Điều tra hình sự, type: phong, provisional: true, aliases: [Cơ quan Điều tra hình sự]}
+- {id: btm.d30, parent: btm, name: Tiểu đoàn 30, type: don_vi, aliases: [d30, e30]}
+- {id: btm.d31, parent: btm, name: Tiểu đoàn 31, type: don_vi, aliases: [d31]}
+- {id: btm.d33, parent: btm, name: Tiểu đoàn 33, type: don_vi, aliases: [d33]}
+- {id: btm.d38, parent: btm, name: Tiểu đoàn 38, type: don_vi, aliases: [d38]}
+- {id: btm.d41, parent: btm, name: Tiểu đoàn 41, type: don_vi, aliases: [d41]}
+- {id: btm.d97, parent: btm, name: Tiểu đoàn 97, type: don_vi, aliases: [d97]}
+- {id: btm.kho_cb, parent: btm, name: Kho CB, type: don_vi}
+- {id: btm.ptknl, parent: btm, name: PTKNL, type: don_vi}
+- {id: btm.xuong_thong_tin, parent: btm, name: Xưởng Thông tin, type: don_vi}
+- {id: btm.xuong_10, parent: btm, name: Xưởng 10, type: don_vi}
+- {id: btm.doi_bong_chuyen, parent: btm, name: Đội Bóng chuyền nam, type: don_vi, aliases: [Đội Bóng chuyền]}
+- {id: btm.c40, parent: btm, name: Đội xe C40, type: don_vi, aliases: [c40]}
+- {id: btm.ttgdqp, parent: btm, name: Trung tâm giáo dục quốc phòng, type: don_vi}
+- {id: btm.trai_tam_giam, parent: btm, name: Trại tạm giam, type: don_vi}
+
+# ---- Cục Chính trị
+- {id: cct, parent: btl, name: Cục Chính trị, type: co_quan, aliases: [CCT]}
+- {id: cct.bvan, parent: cct, name: Phòng Bảo vệ an ninh, type: phong, aliases: [Phòng BVAN, BVAN]}
+- {id: cct.chinh_sach, parent: cct, name: Phòng Chính sách, type: phong}
+- {id: cct.can_bo, parent: cct, name: Phòng Cán bộ, type: phong}
+- {id: cct.ctqc, parent: cct, name: Phòng Công tác quần chúng, type: phong, aliases: [Phòng CTQC, CTQC]}
+- {id: cct.dan_van, parent: cct, name: Phòng Dân vận, type: phong}
+- {id: cct.khth, parent: cct, name: Phòng Kế hoạch tổng hợp, type: phong, aliases: [Phòng KHTH, KHTH]}
+- {id: cct.tuyen_huan, parent: cct, name: Phòng Tuyên huấn, type: phong}
+- {id: cct.to_chuc, parent: cct, name: Phòng Tổ chức, type: phong}
+- {id: cct.ban_tai_chinh, parent: cct, name: Ban Tài chính (Cục Chính trị), type: ban}
+- {id: cct.bao_qk, parent: cct, name: Báo Quân khu, type: don_vi, aliases: [Báo QK]}
+- {id: cct.bao_tang, parent: cct, name: Bảo tàng, type: don_vi}
+- {id: cct.nha_van_hoa, parent: cct, name: Nhà văn hóa, type: don_vi}
+- {id: cct.xuong_in, parent: cct, name: Xưởng in, type: don_vi}
+- {id: cct.doan_295, parent: cct, name: Đoàn 295, type: don_vi}
+- {id: cct.toa_an, parent: cct, name: Tòa án Quân sự Quân khu 3, type: don_vi, aliases: [Tòa án]}
+- {id: cct.vks, parent: cct, name: Viện Kiểm sát Quân sự, type: don_vi, aliases: [VKS]}
+- {id: cct.ubkt, parent: cct, name: Ủy ban Kiểm tra Đảng ủy Quân khu 3, type: don_vi, aliases: [Ủy ban kiểm tra Đảng]}
+
+# ---- Cục Hậu cần - Kỹ thuật
+- {id: hckt, parent: btl, name: Cục Hậu cần - Kỹ thuật, type: co_quan, aliases: [Cục HCKT, Cục Hậu cần Kỹ thuật, Cục HC-KT, Cục Hậu cần]}
+- {id: hckt.ban_tai_chinh, parent: hckt, name: Ban Tài chính (Cục HC-KT), type: ban}
+- {id: hckt.ban_tcdlcl, parent: hckt, name: Ban Tiêu chuẩn Đo lường Chất lượng, type: ban}
+- {id: hckt.chinh_tri, parent: hckt, name: Phòng Chính trị (Cục HC-KT), type: phong}
+- {id: hckt.doanh_trai, parent: hckt, name: Phòng Doanh trại, type: phong}
+- {id: hckt.quan_khi, parent: hckt, name: Phòng Quân khí, type: phong}
+- {id: hckt.quan_y, parent: hckt, name: Phòng Quân y, type: phong}
+- {id: hckt.quan_nhu, parent: hckt, name: Phòng Quân nhu, type: phong}
+- {id: hckt.tmkh, parent: hckt, name: Phòng Tham mưu kế hoạch, type: phong, aliases: [Phòng TMKH, TMKH]}
+- {id: hckt.xm_vt, parent: hckt, name: Phòng Xe máy - Vận tải, type: phong, aliases: [Phòng XM-vt, XM-vt]}
+- {id: hckt.xang_dau, parent: hckt, name: Phòng Xăng dầu, type: phong, aliases: [Phòng XD, XD]}
+- {id: hckt.ld653, parent: hckt, name: Lữ đoàn 653, type: don_vi}
+- {id: hckt.bv_quan_y_7, parent: hckt, name: Bệnh viện Quân y 7, type: don_vi}
+- {id: hckt.k22, parent: hckt, name: Kho K22, type: don_vi}
+- {id: hckt.k23, parent: hckt, name: Kho K23, type: don_vi}
+- {id: hckt.k76, parent: hckt, name: Kho K76, type: don_vi}
+- {id: hckt.k84, parent: hckt, name: Kho K84, type: don_vi}
+- {id: hckt.kho_hctc, parent: hckt, name: Kho Hậu cần tổng hợp, type: don_vi}
+- {id: hckt.kho_xang_dau, parent: hckt, name: Kho Xăng dầu, type: don_vi}
+- {id: hckt.x56, parent: hckt, name: Xưởng X56, type: don_vi}
+- {id: hckt.x81, parent: hckt, name: Xưởng X81, type: don_vi}
+
+# ---- Đơn vị trực thuộc Bộ Tư lệnh
+- {id: chqs_hp, parent: btl, name: Bộ CHQS TP. Hải Phòng, type: don_vi, aliases: [Bộ CHQS Hải Phòng]}
+- {id: chqs_qn_tp, parent: btl, name: Bộ CHQS TP. Quảng Ninh, type: don_vi}
+- {id: chqs_hy, parent: btl, name: Bộ CHQS tỉnh Hưng Yên, type: don_vi, aliases: [Bộ CHQS Hưng Yên]}
+- {id: chqs_qn, parent: btl, name: Bộ CHQS tỉnh Quảng Ninh, type: don_vi, aliases: [Bộ CHQS Quảng Ninh]}
+- {id: sd395, parent: btl, name: Sư đoàn 395, type: don_vi, aliases: [e395, f395, fBB395]}
+- {id: sd350, parent: btl, name: Sư đoàn 350, type: don_vi, aliases: [f350]}
+- {id: ld214, parent: btl, name: Lữ đoàn 214, type: don_vi}
+- {id: ld242, parent: btl, name: Lữ đoàn 242, type: don_vi}
+- {id: ld405, parent: btl, name: Lữ đoàn 405, type: don_vi}
+- {id: ld454, parent: btl, name: Lữ đoàn 454, type: don_vi}
+- {id: ld513, parent: btl, name: Lữ đoàn 513, type: don_vi}
+- {id: ld603, parent: btl, name: Lữ đoàn 603, type: don_vi}
+- {id: truong_qs, parent: btl, name: Trường Quân sự Quân khu 3, type: don_vi, aliases: [Trường Quân sự Quân khu]}
+- {id: dkt327, parent: btl, name: Đoàn Kinh tế - Quốc phòng 327, type: don_vi}
+- {id: cd_nghe_20, parent: btl, name: Trường Cao đẳng nghề số 20, type: don_vi}
+- {id: tsq_ph2, parent: btl, name: Phân hiệu 2 trường Thiếu sinh quân miền Bắc, type: don_vi}

@@ -1,0 +1,110 @@
+# Hồ sơ (profile patch) của agent QK3 đặt lên trên profile `sdk` của DeepSeek Harness (deepseek-harness-sdk==0.2.1rc2, bản thử nghiệm).
+# Mục tiêu: mô hình chỉ có các công cụ tra cứu văn bản của mình (MCP, app/rag/mcp_server.py). Đã tắt: shell, tệp, subagent, workflow/ptc,
+# web (đường ra Internet), goal, kỹ năng, telemetry, tài khoản DeepSeek, truy cập từ xa, thư mục làm việc, chế độ lập kế hoạch.
+# Danh tính người hỏi nằm trong QK3_SCOPE_TOKEN của môi trường tiến trình công cụ (xem app/rag/identity.py), không do mô hình quyết định.
+# Môi trường do app/agent/runtime.py đặt khi khởi động từng runtime (một runtime cho mỗi cuộc trò chuyện): QK3_LLM_BASE_URL, QK3_LLM_MODEL,
+# QK3_LLM_KEY, QK3_LLM_CONTEXT, QK3_PYTHON, QK3_BACKEND, QK3_SCOPE_TOKEN và các biến chuyển tiếp cho tiến trình công cụ (xem FORWARDED).
+# Không ghi cứng địa chỉ LLM ở đây: nó do quản trị viên cấu hình trong Quản trị → Hệ thống.
+- {id: tool-bash, name: '@deepseek-ai/dsh-tool-bash', disabled: true}
+- {id: tool-pwsh, name: '@deepseek-ai/dsh-tool-pwsh', disabled: true}
+- {id: tool-jobs, name: '@deepseek-ai/dsh-tool-jobs', disabled: true}
+- {id: tool-fs, name: '@deepseek-ai/dsh-tool-fs', disabled: true}
+- {id: tool-fs-search, name: '@deepseek-ai/dsh-tool-fs-search', disabled: true}
+- {id: tool-skill, name: '@deepseek-ai/dsh-tool-skill', disabled: true}
+- {id: tool-workflow, name: '@deepseek-ai/dsh-tool-workflow', disabled: true}
+- {id: tool-subagent, name: '@deepseek-ai/dsh-tool-subagent', disabled: true}
+- {id: tool-subagent-fork, name: '@deepseek-ai/dsh-tool-subagent', disabled: true}
+- {id: tool-subagent-control, name: '@deepseek-ai/dsh-tool-subagent-control', disabled: true}
+- {id: tool-subagent-list-agents, name: '@deepseek-ai/dsh-tool-subagent-control/list-agents', disabled: true}
+- {id: otel, name: '@deepseek-ai/dsh-otel', disabled: true}
+- {id: session-telemetry-otel, name: '@deepseek-ai/dsh-session-telemetry-otel', disabled: true}
+- {id: remote-access, name: '@deepseek-ai/dsh-api-remote-access', disabled: true}
+- {id: deepseek-account, name: '@deepseek-ai/dsh-deepseek-account-platform', disabled: true}
+- {id: tool-web, name: '@deepseek-ai/dsh-tool-web', disabled: true}
+- {id: web-fetch-http, name: '@deepseek-ai/dsh-web-fetch-http', disabled: true}
+- {id: web-search-deepseek, name: '@deepseek-ai/dsh-web-search-deepseek', disabled: true}
+- {id: web-deepseek-api, name: '@deepseek-ai/dsh-web-deepseek-api', disabled: true}
+- {id: web, name: '@deepseek-ai/dsh-web', disabled: true}
+- {id: tool-goal, name: '@deepseek-ai/dsh-tool-goal', disabled: true}
+- {id: goal-round-driver, name: '@deepseek-ai/dsh-goal-round-driver', disabled: true}
+- {id: command-goal, name: '@deepseek-ai/dsh-command-goal', disabled: true}
+- {id: goal, name: '@deepseek-ai/dsh-goal', disabled: true}
+- {id: ptc-runtime, name: '@deepseek-ai/dsh-ptc-runtime-node', disabled: true}
+- {id: workflow-ptc, name: '@deepseek-ai/dsh-workflow-ptc', disabled: true}
+- {id: agent-instructions, name: '@deepseek-ai/dsh-agent-instructions', disabled: true}
+- {id: user-questions, name: '@deepseek-ai/dsh-user-questions', disabled: true}
+- id: system-prompt
+  name: '@deepseek-ai/dsh-system-prompt'
+  config:
+    personaPrefix: |-
+      Bạn là trợ lý AI của Quân khu 3, giúp cán bộ tra cứu, tổng hợp, tóm tắt và soạn thảo văn bản hành chính.
+      Nguyên tắc: trả lời bằng tiếng Việt, văn phong hành chính quân sự nghiêm túc, ngắn gọn, đúng thể thức. Chỉ dựa vào nội dung
+      lấy được từ công cụ; không biết thì nói rõ là không tìm thấy, không suy đoán. Bạn chỉ có các công cụ về văn bản; không có
+      Internet, không chạy lệnh.
+      Tra cứu: dùng search_documents (tự chọn mode keyword/semantic/hybrid, dùng bộ lọc metadata khi biết số hiệu, loại, cơ quan,
+      ngày) và list_documents. Khi cần nhiều lượt tìm độc lập (ví dụ tìm theo số hiệu và tìm theo ý nghĩa), gọi chúng CÙNG MỘT LƯỢT
+      thay vì từng lượt một. Kết quả trống thì đổi mode hoặc cách diễn đạt trước khi kết luận.
+      Tóm tắt cả một văn bản: gọi summarize_document (đừng đọc từng trang rồi tự tóm tắt). Chỉ dùng read_document khi cần trích đúng
+      câu chữ.
+      Tệp người dùng đính kèm vào cuộc trò chuyện (mã att<N>) chỉ tra bằng search_attachments, read_attachment, summarize_document.
+      Trích dẫn: mỗi thông tin lấy từ văn bản phải kèm mã 'cite' của đoạn đó trong ngoặc vuông, ví dụ [12#3]; chỉ dùng mã do công cụ
+      trả về, không tự tạo mã.
+      Khi cần công cụ, gọi công cụ của hệ thống ngay trong lượt đó. Không viết "*Tool Call*", không mô tả lệnh bằng chữ thay cho
+      lệnh gọi, và không lặp lại cùng một ý định gọi công cụ.
+      Soạn thảo: khi người dùng bật Canvas hoặc nhờ soạn một văn bản, dùng các công cụ canvas_*: canvas_create để mở mẫu đúng loại
+      văn bản, canvas_set_fields để điền trích yếu, kính gửi, nơi nhận..., canvas_set_content để viết nội dung. Hệ thống tự điền quốc
+      hiệu, tên cơ quan, ký hiệu, ngày; những ô cần người dùng nhập (người ký, số lượng cụ thể...) hãy để trống và nói rõ trong câu
+      trả lời. Viết đúng văn phong quân đội và của đơn vị người dùng: theo 'style' mà canvas_create trả về (bố cục, câu mở đầu, câu
+      kết, căn cứ, nơi nhận, thuật ngữ thường dùng của đơn vị, quy tắc Thông tư 68, và phong cách trong 'style.chosen'); cần văn bản
+      mẫu cùng loại gần chủ đề thì gọi canvas_style(topic=...). Khi viết hoặc sửa đoạn thuộc một mục, gọi canvas_style(section=tên
+      mục) để lấy đoạn mẫu của mục đó. Văn bản mẫu chỉ để học cách viết, không chép số liệu, tên người, ngày tháng của chúng.
+      Chỉnh đoạn đã có thì dùng canvas_edit_block (đây là đề xuất, người dùng chấp nhận hoặc từ chối); sửa ô, dòng, cột của bảng
+      thì dùng canvas_edit_table. Bảng chỉ tạo bằng khối 'table', không vẽ bằng Markdown; số liệu chưa có để '…'; tổng cộng và số
+      suy ra để hệ thống tính bằng dòng 'total' và 'formula'. Sau khi soạn, tóm tắt ngắn
+      gọn những gì đã làm và những gì còn thiếu; không dán lại toàn văn vào câu trả lời.
+- {id: plan-mode, name: '@deepseek-ai/dsh-plan-mode', disabled: true}
+- {id: tool-working-directory, name: '@deepseek-ai/dsh-tool-working-directory', disabled: true}
+- id: llm-pi-ai
+  name: '@deepseek-ai/dsh-llm-pi-ai'
+  config:
+    providers:
+      qk3:
+        displayName: QK3 LLM
+        apiKeyEnv: QK3_LLM_KEY
+        api: openai-completions
+        baseURL: !!js process.env.QK3_LLM_BASE_URL
+        models:
+          - id: !!js process.env.QK3_LLM_MODEL
+            name: QK3
+            contextWindow: !!js Number(process.env.QK3_LLM_CONTEXT || 131072)
+            # Qwen3 thinks unless the request says otherwise. `high` sends enable_thinking true, `off` sends false
+            # (app.agent.runtime.reasoning_effort, the admin switch "Suy nghĩ trước khi trả lời").
+            reasoningEfforts:
+              high: high
+            compat:
+              thinkingFormat: qwen-chat-template
+- insert:
+    - id: mcp-qk3
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: qk3
+        transport: stdio
+        command: !!js process.env.QK3_PYTHON
+        args: ['-m', 'app.rag.mcp_server']
+        cwd: !!js process.env.QK3_BACKEND
+        failOnStartupError: true
+        env:
+          QK3_SCOPE_TOKEN: !!js process.env.QK3_SCOPE_TOKEN
+          JWT_SECRET: !!js process.env.JWT_SECRET
+          SETTINGS_KEY: !!js process.env.SETTINGS_KEY
+          DATABASE_URL: !!js process.env.DATABASE_URL
+          DATA_DIR: !!js process.env.DATA_DIR
+          UPLOAD_DIR: !!js process.env.UPLOAD_DIR
+          TEMP_DIR: !!js process.env.TEMP_DIR
+          APP_ENV: !!js process.env.APP_ENV
+          QDRANT_URL: !!js process.env.QDRANT_URL
+          QDRANT_API_KEY: !!js process.env.QDRANT_API_KEY
+          QDRANT_COLLECTION: !!js process.env.QDRANT_COLLECTION
+          QK3_EMBEDDER: !!js process.env.QK3_EMBEDDER
+          QK3_EMBEDDER_DIM: !!js process.env.QK3_EMBEDDER_DIM
+          PYTHONPATH: !!js process.env.QK3_BACKEND

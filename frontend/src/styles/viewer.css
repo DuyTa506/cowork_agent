@@ -1,0 +1,122 @@
+/* DocumentViewer: a white sheet of paper on a grey-blue desk with a floating zoom control. */
+.viewer { position: relative; flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; background: var(--doc-bg); }
+.viewer__scroll { flex: 1; min-height: 0; overflow: auto; padding: 20px 20px 76px; }
+.viewer__scroll:focus-visible { outline-offset: -2px; }
+.viewer__status { display: grid; place-items: center; padding: 48px 0; }
+.viewer__sheet {
+  margin: 0 auto;
+  min-height: 520px;
+  padding: 2.4em 2.6em 2.8em;
+  background: var(--paper);
+  box-shadow: var(--sh-paper);
+  font-family: var(--font-doc);
+  line-height: 1.5;
+  color: var(--paper-ink);
+}
+.viewer__sheet--fit { width: 100%; max-width: 820px; }
+.viewer__sheet:not(.viewer__sheet--fit) { flex: none; }
+.viewer__sheet p { margin: 0 0 0.45em; white-space: pre-line; overflow-wrap: anywhere; }
+.viewer__empty { color: #666; text-align: center; }
+.viewer__sheet .viewer__hl {
+  margin-left: -0.7em;
+  padding-left: calc(0.7em - 3px);
+  border-left: 3px solid var(--brass);
+  background: var(--highlight);
+  animation: viewer-hl 1.2s ease-out 1;
+}
+@keyframes viewer-hl { from { background: color-mix(in srgb, var(--accent) 55%, transparent); } to { background: var(--highlight); } }
+.viewer__table { width: 100%; margin: 0.5em 0 0.8em; border-collapse: collapse; table-layout: auto; }
+.viewer__table td { padding: 0.25em 0.5em; border: 1px solid #8e949e; vertical-align: top; }
+.viewer__table td p { margin: 0 0 0.2em; }
+
+.viewer__zoom {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  box-shadow: var(--sh-2);
+  color: var(--text-2);
+  font-family: var(--font);
+  font-size: 13px;
+}
+.viewer__zoom .icon-btn { width: 32px; height: 32px; color: var(--text-2); }
+.viewer__zoom .icon-btn:hover:not(:disabled) { background: var(--surface-2); color: var(--text); }
+.viewer__zoom .icon-btn.is-on { background: var(--primary-tint); color: var(--primary); }
+.viewer__zoom-value { min-width: 68px; padding: 0 4px; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--text); }
+.viewer__zoom-sep { width: 1px; height: 20px; margin: 0 4px; background: var(--line); }
+
+@media (prefers-reduced-motion: reduce) {
+  .viewer__hl { animation: none; }
+}
+
+/* Page view (PdfViewer): the pages of a document, with the OCR blocks of a scan over them. */
+.scanview { flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+.scan__probe { align-items: center; justify-content: center; }
+.scanbar { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--surface); font-family: var(--font); font-size: 13px; }
+.scanbar__seg { display: inline-flex; padding: 2px; gap: 2px; border: 1px solid var(--line-strong); border-radius: var(--r-md); background: var(--surface-2); }
+.scanbar__seg button, .scanbar__toggle {
+  min-height: 28px; padding: 0 12px; border: 1px solid transparent; border-radius: calc(var(--r-md) - 2px); background: transparent;
+  color: var(--text-2); font: inherit; font-weight: 600; cursor: pointer;
+}
+.scanbar__toggle { border-color: var(--line-strong); background: var(--surface); }
+.scanbar__seg button:hover, .scanbar__toggle:hover { color: var(--text); background: var(--surface-hover); }
+.scanbar__seg button.is-on { background: var(--surface); border-color: var(--line-strong); color: var(--primary); box-shadow: var(--sh-1, none); }
+.scanbar__toggle.is-on { background: var(--primary-tint); border-color: var(--primary); color: var(--primary); }
+.scanbar button:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
+@media (pointer: coarse) { .scanbar__seg button, .scanbar__toggle { min-height: 40px; } }
+
+.scan__scroll { padding: 16px 16px 76px; }
+.scan__sheet { margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+.scan__sheet--fit { width: 100%; max-width: 900px; }
+.scan__sheet:not(.scan__sheet--fit) { flex: none; }
+.scan__page { margin: 0; }
+.scan__frame { position: relative; width: 100%; background: var(--paper); box-shadow: var(--sh-paper); container-type: inline-size; overflow: hidden; }
+.scan__img { display: block; width: 100%; height: 100%; user-select: none; }
+.scan__wait { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--paper-ink); font-family: var(--font); font-size: 13px; }
+.scan__no { margin-top: 4px; text-align: center; font-family: var(--font); font-size: 12px; color: var(--text-3); font-variant-numeric: tabular-nums; }
+
+.scan__blocks { position: absolute; inset: 0; }
+.scan__blk {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  line-height: 1.15;
+  --blk: var(--text-3);
+}
+.scan__blk--head { --blk: var(--primary); }
+.scan__blk--text { --blk: var(--info); }
+.scan__blk--table { --blk: var(--ok); }
+.scan__blk--pic { --blk: var(--text-3); }
+.scan__blk:hover { border-color: var(--blk); background: color-mix(in srgb, var(--blk) 14%, transparent); }
+.scan__blocks--all .scan__blk { border-color: color-mix(in srgb, var(--blk) 65%, transparent); background: color-mix(in srgb, var(--blk) 10%, transparent); }
+/* the text of the block: invisible, but selectable and found by Ctrl+F */
+.scan__text { display: block; color: transparent; white-space: pre-line; overflow-wrap: anywhere; }
+.scan__text::selection { background: color-mix(in srgb, var(--primary) 35%, transparent); color: transparent; }
+.scan__blk { cursor: text; }
+.scan__blk--pic { cursor: default; }
+.scan__blk--pic .scan__text { display: none; }
+.scan__blocks .scan__blk--hl, .scan__blocks--all .scan__blk--hl {
+  border: 0;
+  border-left: 3px solid var(--brass);
+  background: var(--highlight);
+  animation: viewer-hl 1.2s ease-out 1;
+}
+@media (prefers-reduced-motion: reduce) { .scan__blk--hl { animation: none; } }
+
+/* PdfViewer: pages drawn by pdf.js. */
+.pdfv__host { position: absolute; inset: 0; }
+.pdfv__canvas { display: block; width: 100%; height: 100%; user-select: none; }
+.pdfv__text { z-index: 1; }
+.pdfv__text .textLayer { --min-font-size: 1; }
+.pdfv__text .textLayer span.pdfv__hl { background: rgb(255 196 0 / 0.42); border-radius: 2px; mix-blend-mode: multiply; }
+.pdfv__note { margin: 0 auto 12px; max-width: 900px; padding: 8px 12px; border-radius: var(--r-md); background: var(--surface); border: 1px solid var(--line-strong); font-family: var(--font); font-size: 13px; color: var(--text-2); }
+.scan__sheet { max-width: none; }
+.scan__blocks { z-index: 2; }

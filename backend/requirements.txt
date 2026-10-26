@@ -1,0 +1,18 @@
+fastapi[standard]>=0.128,<1.0
+SQLAlchemy>=2.0,<3.0
+psycopg[binary]>=3.2,<4.0
+PyJWT>=2.10,<3.0
+python-multipart>=0.0.20,<1.0
+httpx>=0.28,<1.0
+cryptography>=44.0
+qdrant-client>=1.15,<2.0
+PyYAML>=6.0,<7.0
+mcp>=2.3,<3.0
+doccheck>=0.4.2,<1.0   # format checker and document reader; installed from wheels/ (see wheels/README.md)
+python-docx>=1.1,<2.0     # writes the draft (canvas) as a Word file
+deepseek-harness-sdk==0.2.1rc2  # agent harness (pre-release); installed from wheels/ together with its runtime binary
+minio>=7.2,<8.0
+pypdfium2>=4.30,<6.0     # draws PDF pages for OCR
+pillow>=10.0             # PNG encoding of those pages
+onnxruntime>=1.18,<2.0   # runs the hate-speech classifier of the input screening on CPU
+sentencepiece>=0.2,<0.3  # tokenizer of that classifier

@@ -1,9 +1,27 @@
+# secrets and local runtime
 .env
+.venv/
 .cache/
 logs/
 *.log
+*.db
+.DS_Store
+
+# python
 __pycache__/
-# model weights and OCR checkpoints stay local: never commit or push them
+*.py[cod]
+
+# web app local data, weights, install trees
+backend/data/
+backend/models/*/*.onnx
+backend/models/*/*.model
+backend/wheels/*.whl
+frontend/node_modules/
+frontend/dist/
+frontend/tsconfig.tsbuildinfo
+.vscode/.ropeproject
+
+# serving engine weights stay local
 models/
 *.safetensors
 *.pt

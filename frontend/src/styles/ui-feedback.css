@@ -1,0 +1,130 @@
+/* Feedback: alert, toast, empty state, skeleton, progress, tooltip. */
+
+/* ---------- alert ---------- */
+.alert {
+  --c: var(--info);
+  --c-bg: var(--info-soft);
+  --c-line: var(--info-line);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-card);
+  background: var(--c-bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 20px;
+}
+.alert__icon { flex: none; margin-top: 1px; color: var(--c); }
+.alert__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.alert__title { font-weight: 600; }
+.alert__text { color: var(--text-2); }
+.alert__action { flex: none; align-self: center; }
+.alert__close { flex: none; margin: -4px -6px -4px 0; }
+.alert--error { --c: var(--danger); --c-bg: var(--danger-soft); --c-line: var(--danger-line); }
+.alert--warning { --c: var(--warn); --c-bg: var(--warn-soft); --c-line: var(--warn-line); }
+.alert--success { --c: var(--ok); --c-bg: var(--ok-soft); --c-line: var(--ok-line); }
+@media (max-width: 520px) { .alert { flex-wrap: wrap; } .alert__action { margin-left: 30px; } }
+
+/* ---------- toast ---------- */
+.toasts {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(400px, calc(100vw - 32px));
+  pointer-events: none;
+}
+.toast {
+  --c: var(--ok);
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 12px 12px 14px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--c);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-3);
+  font-size: 14px;
+  line-height: 20px;
+  animation: slide-in-right var(--dur-panel) var(--ease) both;
+}
+.toast--error { --c: var(--danger); }
+.toast--info { --c: var(--info); }
+.toast--warning { --c: var(--warn); }
+.toast__icon { flex: none; margin-top: 1px; color: var(--c); }
+.toast__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; overflow-wrap: anywhere; }
+.toast__action { align-self: flex-start; padding: 0; border: 0; background: none; color: var(--primary); font-weight: 600; font-size: 13px; cursor: pointer; border-radius: var(--r-xs); }
+.toast__action:hover { text-decoration: underline; text-underline-offset: 2px; }
+.toast__close { flex: none; margin: -4px -4px -4px 0; }
+
+/* ---------- empty state ---------- */
+.empty { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 48px 24px; text-align: center; }
+.empty--compact { padding: 24px 16px; }
+.empty__art { display: block; width: 96px; height: 96px; margin-bottom: 8px; color: var(--primary); }
+.empty--compact .empty__art { width: 72px; height: 72px; }
+.empty__icon { display: grid; place-items: center; width: 56px; height: 56px; margin-bottom: 4px; border-radius: 50%; background: var(--primary-soft); color: var(--primary-ink); }
+.empty__title { font-size: 17px; line-height: 26px; font-weight: 600; color: var(--text); }
+.empty__text { max-width: 420px; font-size: 14px; line-height: 20px; color: var(--text-2); }
+.empty__action { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 12px; }
+
+/* art colours: illustrations only use these classes */
+.art-line { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.art-fill { fill: var(--primary-soft); stroke: none; }
+.art-paper { fill: var(--surface); stroke: var(--border-strong); stroke-width: 1.6; stroke-linejoin: round; }
+.art-accent { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.art-dim { fill: none; stroke: var(--border-strong); stroke-width: 1.6; stroke-linecap: round; }
+.art-danger { fill: none; stroke: var(--danger); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- skeleton ---------- */
+.skeleton {
+  display: block;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--surface-hover) 20%, var(--border) 40%, var(--surface-hover) 60%) 100% 0 / 300% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+.skeleton--circle { border-radius: 50%; }
+.skeleton-text { display: flex; flex-direction: column; gap: 8px; }
+@media (prefers-reduced-motion: reduce) { .skeleton { animation: none; background: var(--surface-hover); } }
+
+/* ---------- progress ---------- */
+.meter { display: flex; flex-direction: column; gap: 6px; }
+.meter__label { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; line-height: 16px; color: var(--text-2); }
+.meter__bar { height: 6px; border-radius: var(--r-pill); background: var(--border); overflow: hidden; }
+.meter__fill { height: 100%; border-radius: inherit; background: var(--primary); transition: width var(--dur-menu) var(--ease); }
+.meter--ok .meter__fill { background: var(--ok); }
+.meter--danger .meter__fill { background: var(--danger); }
+.meter--indeterminate .meter__fill { width: 40%; animation: indeterminate 1.3s var(--ease) infinite; }
+@keyframes indeterminate { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
+
+/* thin bar under the top edge while the route changes */
+.route-progress { position: fixed; inset: 0 0 auto 0; z-index: var(--z-progress); height: 3px; pointer-events: none; opacity: 0; }
+.route-progress__bar { height: 100%; width: 100%; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, var(--primary), var(--accent)); box-shadow: 0 0 8px color-mix(in srgb, var(--primary) 60%, transparent); }
+.route-progress--run { opacity: 1; }
+.route-progress--run .route-progress__bar { transform: scaleX(0.82); transition: transform 600ms var(--ease); }
+.route-progress--done { opacity: 0; transition: opacity 260ms var(--ease) 80ms; }
+.route-progress--done .route-progress__bar { transform: scaleX(1); transition: transform 160ms var(--ease); }
+
+/* ---------- tooltip ---------- */
+.tooltip {
+  position: fixed;
+  z-index: var(--z-toast);
+  max-width: 260px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--text);
+  color: var(--surface);
+  box-shadow: var(--shadow-2);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  pointer-events: none;
+  animation: fade-in 120ms var(--ease) both;
+}

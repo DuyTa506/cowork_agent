@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-containers",
+    "ms-vscode-remote.remote-wsl",
+    "EditorConfig.EditorConfig",
+    "humao.rest-client"
+  ]
+}
